@@ -1,8 +1,8 @@
 To run the examples here:
-copy *.sql *.sh  to your symfony folder,
-have correct db settings in parameters.yml
-export MYSQLCMD with your proper credentials or edit the .sh file,
-then run
+1. copy (or link) *.sql *.sh  to your symfony folder,
+2. have correct db settings in parameters.yml
+3. export MYSQLCMD with your proper credentials or edit the .sh file,
+4. run
 ./doctrine-declare-only-once.sh
 
 you should see something like the contents of test-output.txt
