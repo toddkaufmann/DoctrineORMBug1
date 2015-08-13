@@ -31,10 +31,13 @@ generated...  try it.
 
 3.  The column c2_id is renamed to c2_idxx from the above, and now the
 message goes away.  But neither tab1 nor tab2 are generated!
+If you look at the other two files there are references to tab1 & tab2 though.
 
     doctrine-declare-only-once.tab2-renamed.sql
 
 
 
+These files and a script to call them are also at
+https://github.com/toddkaufmann/DoctrineORMBug1
 
-
+Thanks.
