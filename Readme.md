@@ -1,4 +1,15 @@
-this is the initial bug text:
+To run the examples here:
+copy *.sql *.sh  to your symfony folder,
+have correct db settings in parameters.yml
+export MYSQLCMD with your proper credentials or edit the .sh file,
+then run
+./doctrine-declare-only-once.sh
+
+you should see something like the contents of test-output.txt
+
+
+This is the initial bug text submitted
+http://www.doctrine-project.org/jira/browse/DDC-3873
 -----------------------------------------------------------------------------
 
 I'm reverse engineering a large (100+ tables) schema and encountered the 
