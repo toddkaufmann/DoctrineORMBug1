@@ -3,12 +3,12 @@ this is the initial bug text:
 
 I'm reverse engineering a large (100+ tables) schema and encountered the 
 
-Property "X" in "TableY" was already declared, but it must be declared only once
+    Property "X" in "TableY" was already declared, but it must be declared only once
 
-and was unable to find a satisfactory solution or explanation, so I
-tried to find a small example of the problem.  In doing so I may have
-also found another bug where entities do not get generated for
-existing tables.
+message and was unable to find a satisfactory solution or explanation,
+so I tried to find a small example of the problem.  In doing so I may
+have also found another bug where entities do not get generated for
+existing tables.  Attached are 
 
 1.  Two tables referencing the same table.column as foreign key.  This
 seems to have been the problem in the past, but here seems to work fine.
@@ -24,8 +24,8 @@ besides being two foreign key constraints, isn't that different than the first.
 
     doctrine-declare-only-once.sql
 
-NOTE:  if you comment out either of the foreign key constraints in
-either tab1 or tab2, the error goes away.  But one of them will not be
+2(b).  NOTE:  if you comment out either of the foreign key constraints in
+either table tab1 or tab2, the error goes away.  But one of them will not be
 generated...  try it.
 
 

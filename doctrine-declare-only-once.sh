@@ -2,30 +2,52 @@
 
 # Edit the line here for your db instance, or export in your shell to override
 
-: ${MYSQLCMD:="$HOME/bin/mysql -h localhost -P 8889 -u cal0u -pcal0upw cal0"}
- 
+: ${MYSQLCMD:="mysql -h localhost -u root  symfony"}
+# you can override in the env if you didn't copy to here
+: ${SQLDIR:="."}
+
+CONSOLE=app/console
+
+if [ ! -x "$CONSOLE" ]; then
+    echo "Are you in a symfony folder?  No app/console to call..."
+    exit 1
+fi
+
+if echo 'show tables;' | $MYSQLCMD >/dev/null ; then 
+    echo Database settings seem okay..
+else
+    echo Edit script to customize database settings or export MYSQLCMD.
+    echo Then we may proceed.
+    exit 2
+fi
+
 read -p 'WARNING - proceding will possibly wipe out existing entities, maybe do something to your db. "Y" to Proceed?' are_you_sure
 if [ "$are_you_sure" != "Y" ]; then
   echo chicken.
-  exit 1
+  exit 3
 fi
 
 clean_test() {
- local SQL=$1
- rm -f src/AppBundle/Entity/* \
- &&  $MYSQLCMD < "$SQL"   \
- && php app/console  doctrine:mapping:import  AppBundle annotation
+    local SQL=$1
+    if [ -e "$SQL" ]; then
+	rm -f src/AppBundle/Entity/* \
+	    &&  $MYSQLCMD < "$SQL"   \
+	    && php $CONSOLE  doctrine:mapping:import  AppBundle annotation
+    else
+	echo " >>>>>>>>>>>>>> CAN'T FIND  $SQL (did you copy to local? "
+	sleep 2
+    fi
 }
 
 
 echo "======= 1.  two tables, both reference same with foreign key ======"
-clean_test ~/git/bug-report/doctrine-declare-only-once.c1-only.sql
+clean_test "$SQLDIR"/doctrine-declare-only-once.c1-only.sql
 # this one looks fine
 ls -lt src/AppBundle/Entity/*
 
 echo
 echo "======= 2.  two tables, both reference same two tables with foreign key ======"
-clean_test ~/git/bug-report/doctrine-declare-only-once.sql
+clean_test "$SQLDIR"/doctrine-declare-only-once.sql
                    
 # this is what you get:
 #
@@ -39,7 +61,7 @@ clean_test ~/git/bug-report/doctrine-declare-only-once.sql
 
 echo
 echo "======= 3.  two tables, both reference same with foreign key, second table columns renamed ======"
-clean_test ~/git/bug-report/doctrine-declare-only-once.tab2-renamed.sql
+clean_test "$SQLDIR"/doctrine-declare-only-once.tab2-renamed.sql
 echo
 ls -lt src/AppBundle/Entity/*
 echo
