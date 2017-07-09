@@ -9,8 +9,9 @@ To run the examples here:
 you should see something like the contents of test-output.txt
 
 
-This is the initial bug text submitted @ http://www.doctrine-project.org/jira/browse/DDC-3873
+This is the initial bug text submitted @ ~~http://www.doctrine-project.org/jira/browse/DDC-3873~~
 
+**Note: they moved to github issues, find it here: https://github.com/doctrine/doctrine2/issues/4726 **
 -----------------------------------------------------------------------------
 
 I'm reverse engineering a large (100+ tables) schema and encountered the 
